@@ -2,7 +2,7 @@ name: Deploy React App to GitHub Pages
 
 on:
   push:
-    branches: ["master"] 
+    branches: ["master"]
 
 permissions:
   contents: read
@@ -24,12 +24,12 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Set up Node
-        uses: actions/node@v4
+        uses: actions/setup-node@v4
         with:
           node-version: 20
 
       - name: Install dependencies
-        run: npm ci
+        run: npm install
 
       - name: Build
         run: npm run build
@@ -40,7 +40,7 @@ jobs:
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: './dist' # Create React App হলে './dist' বদলে './build' লিখুন
+          path: './dist' # যদি Vite ব্যবহার করেন তবে './dist' থাকবে, আর Vite না হয়ে Create React App হলে './build' লিখে দিন।
 
       - name: Deploy to GitHub Pages
         id: deployment
